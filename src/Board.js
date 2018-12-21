@@ -14,42 +14,48 @@ class Board extends Component {
         spaces: ['?','?','?','?','?','?','?','?','?'],
         treasure: "",
         bomb: "",
-        count: 5
+        count: 9
       }
   }
 
 
+setBombAndTreasure() {
+  let { treasure, bomb } = this.state
+  //logging our treasure and bomb locations before randomization
+  console.log("treasure is ", treasure);
+  console.log("bomb is ", bomb);
+  //Randomizing treasure and bomb locations first time
+  treasure = Math.floor(Math.random()* 9)
+  bomb = Math.floor(Math.random()* 9)
+  //logging our treasure and bomb locations after randomization
+  console.log("treasure after ", treasure)
+  console.log("bomb after ", bomb)
+  //Randomize treasure and bomb locations are the same
+  while( bomb === treasure){
+    bomb = Math.floor(Math.random() * 9)
+    console.log("treasure after 2nd iteration ", treasure);
+    console.log("bomb after 2nd iteration ", bomb);
+}
+this.setState({treasure: treasure, bomb: bomb})
+}
 
   componentDidMount() {
-    let { treasure, bomb } = this.state
-//logging our treasure and bomb locations before randomization
-      console.log("treasure is ", treasure);
-      console.log("bomb is ", bomb);
-//Randomizing treasure and bomb locations first time
-    treasure = Math.floor(Math.random()* 9)
-    bomb = Math.floor(Math.random()* 9)
-//logging our treasure and bomb locations after randomization
-    console.log("treasure after ", treasure)
-    console.log("bomb after ", bomb)
-//Randomize treasure and bomb locations are the same
-    while( bomb === treasure){
-      bomb = Math.floor(Math.random() * 9)
-      console.log("treasure after 2nd iteration ", treasure);
-      console.log("bomb after 2nd iteration ", bomb);
-    }
+    this.setBombAndTreasure()
+   }
 
 
-    this.setState({treasure: treasure, bomb: bomb})
-  }
+
+
 
   //Add a method to reset the Game
   restartGame() {
-    this.setState(this.state ={
+    this.setState({
         spaces: ['?','?','?','?','?','?','?','?','?'],
         treasure: "",
         bomb: "",
-        count: 5
+        count: 9
       })
+    this.setBombAndTreasure()
   }
 
 
@@ -119,19 +125,21 @@ class Board extends Component {
 
     return (
       <div>
-      <h1 className = "counter" onClick = {this.click.bind(this)}> you have this amount of guesses: {count}</h1>
-      <div className = "board-container" >
-      <h1 className= "square1" id = "0" onClick={this.click.bind(this)}>{spaces[0]}</h1>
-      <h1 className= "square1" id = "1" onClick={this.click.bind(this)}>{spaces[1]}</h1>
-      <h1 className= "square1" id = "2" onClick={this.click.bind(this)}>{spaces[2]}</h1>
-      <h1 className= "square1" id = "3" onClick={this.click.bind(this)}>{spaces[3]}</h1>
-      <h1 className= "square1" id = "4" onClick={this.click.bind(this)}>{spaces[4]}</h1>
-      <h1 className= "square1" id = "5" onClick={this.click.bind(this)}>{spaces[5]}</h1>
-      <h1 className= "square1" id = "6" onClick={this.click.bind(this)}>{spaces[6]}</h1>
-      <h1 className= "square1" id = "7" onClick={this.click.bind(this)}>{spaces[7]}</h1>
-      <h1 className= "square1" id = "8" onClick={this.click.bind(this)}>{spaces[8]}</h1>
-      <button type="button" onClick= {this.restartGame.bind(this)} > Restart Game </button>
-      </div>
+          <button  type="button" onClick= {this.restartGame.bind(this)} > Restart Game </button>
+          <h1 className = "counter"> you have this amount of guesses: {count}</h1>
+
+
+          <div className = "board-container" >
+          <h1 className= "square1" id = "0" onClick={this.click.bind(this)}>{spaces[0]}</h1>
+          <h1 className= "square1" id = "1" onClick={this.click.bind(this)}>{spaces[1]}</h1>
+          <h1 className= "square1" id = "2" onClick={this.click.bind(this)}>{spaces[2]}</h1>
+          <h1 className= "square1" id = "3" onClick={this.click.bind(this)}>{spaces[3]}</h1>
+          <h1 className= "square1" id = "4" onClick={this.click.bind(this)}>{spaces[4]}</h1>
+          <h1 className= "square1" id = "5" onClick={this.click.bind(this)}>{spaces[5]}</h1>
+          <h1 className= "square1" id = "6" onClick={this.click.bind(this)}>{spaces[6]}</h1>
+          <h1 className= "square1" id = "7" onClick={this.click.bind(this)}>{spaces[7]}</h1>
+          <h1 className= "square1" id = "8" onClick={this.click.bind(this)}>{spaces[8]}</h1>
+          </div>
       </div>
     )
   }

@@ -26,3 +26,11 @@
   text-align: center;
   padding-top: 25px;
 }
+
+.button {
+  border: solid 2px black;
+  height: 100px;
+  width: 200px;
+  padding-top: 25px;
+  margin:0px
+}
